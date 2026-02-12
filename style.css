@@ -1,0 +1,159 @@
+/* --- LOADING SCREEN (FAILSAFE) --- */
+#loader {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: #ffe6f0;
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* THE FIX: Force it to disappear after 2.5s using CSS */
+    animation: forceHide 0.5s ease-in-out forwards;
+    animation-delay: 2.5s;
+    pointer-events: none;
+}
+
+.spinner {
+    font-size: 4rem;
+    animation: spin 1s infinite linear;
+}
+
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+/* This animation kills the loader permanently */
+@keyframes forceHide {
+    0% { opacity: 1; }
+    99% { opacity: 0; width: 100%; height: 100%; }
+    100% { opacity: 0; width: 0; height: 0; visibility: hidden; }
+}
+
+/* --- GLOBAL STYLES --- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background: linear-gradient(135deg, #ffdde1 0%, #ee9ca7 100%);
+    font-family: 'Quicksand', sans-serif; 
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh; text-align: center; overflow: hidden;
+}
+
+/* --- BACKGROUND ANIMATION --- */
+.bg-animation {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 0; overflow: hidden;
+}
+
+.heart {
+    position: absolute; font-size: 1.5rem; opacity: 0.6;
+    animation: floatUp 8s linear infinite; bottom: -50px;
+}
+.heart:nth-child(1) { left: 10%; animation-duration: 7s; }
+.heart:nth-child(2) { left: 30%; animation-duration: 9s; animation-delay: 2s; }
+.heart:nth-child(3) { left: 50%; animation-duration: 6s; animation-delay: 4s; }
+.heart:nth-child(4) { left: 70%; animation-duration: 8s; animation-delay: 1s; }
+.heart:nth-child(5) { left: 90%; animation-duration: 10s; animation-delay: 3s; }
+
+@keyframes floatUp {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    20% { opacity: 0.8; }
+    80% { opacity: 0.8; }
+    100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+}
+
+/* --- MAIN CONTAINER --- */
+#app-container {
+    position: relative; z-index: 10; width: 100%; max-width: 380px;
+    background: rgba(255, 255, 255, 0.65); backdrop-filter: blur(10px);
+    padding: 30px 20px; border-radius: 30px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+
+.sticker-container { height: 180px; display: flex; align-items: center; justify-content: center; }
+#cat-sticker { width: 150px; object-fit: contain; transition: transform 0.2s; }
+
+.bounce { animation: pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+@keyframes pop {
+    0% { transform: scale(0.8); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* --- TYPOGRAPHY --- */
+h1 { 
+    color: #ff4757; 
+    font-family: 'Pacifico', cursive; /* Beautiful Cursive Font */
+    font-size: 2.2rem; 
+    margin: 15px 0 25px 0; 
+    text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+    line-height: 1.2;
+}
+
+/* --- INTERACTIVE AREA --- */
+.interactive-area { 
+    position: relative; 
+    width: 100%; 
+    height: 350px; /* Increased height to give the button room */
+}
+
+/* --- BUTTONS --- */
+button {
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.2rem; font-weight: 700; border: none; border-radius: 50px;
+    cursor: pointer; touch-action: manipulation; transition: transform 0.1s;
+}
+
+button:active { transform: scale(0.95); }
+
+#yes-btn {
+    width: 80%; padding: 18px; background: #ff4757; color: white;
+    box-shadow: 0 8px 20px rgba(255, 71, 87, 0.4);
+    
+    /* Position & Layering */
+    position: absolute; 
+    left: 10%; 
+    top: 0; 
+    z-index: 50; /* Higher Z-Index ensures Yes stays ON TOP */
+    
+    animation: pulseHeart 2s infinite;
+}
+
+@keyframes pulseHeart {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+#no-btn {
+    width: 50%; padding: 15px; background: #b0bec5; color: white;
+    
+    /* Position & Layering */
+    position: absolute; 
+    left: 25%; 
+    top: 80px; 
+    z-index: 10; /* Lower Z-Index ensures No stays BEHIND */
+    
+    transition: left 0.3s ease, top 0.3s ease; 
+}
+
+/* --- TRASH FINALE --- */
+.toss-away { animation: toss 0.8s forwards ease-in; }
+@keyframes toss {
+    0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+    100% { transform: translate(100px, 120px) scale(0.2) rotate(360deg); opacity: 0; }
+}
+
+#trash-can { font-size: 3.5rem; position: absolute; right: 5%; bottom: -10px; animation: slideIn 0.5s forwards; }
+#forced-text {
+    position: absolute; top: 90px; width: 100%; color: #ff4757; font-weight: 700;
+    font-size: 1.2rem; animation: slideIn 0.5s forwards;
+}
+
+@keyframes slideIn { 0% { opacity: 0; transform: translateY(20px); } 100% { opacity: 1; transform: translateY(0); } }
+
+/* --- VIDEO VIEW --- */
+.video-gallery { width: 100%; border-radius: 20px; overflow: hidden; margin-bottom: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.2); background: black; }
+video { width: 100%; display: block; max-height: 350px; object-fit: cover; }
+.beautiful-message { 
+    color: #d81b60; font-size: 1.1rem; font-weight: 600; 
+    background: rgba(255,255,255,0.7); padding: 15px; border-radius: 15px; line-height: 1.5;
+}

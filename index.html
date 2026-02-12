@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>For You 💖</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    
+    <link rel="preload" as="image" href="https://media.giphy.com/media/ICOgUNjpvO0PC/giphy.gif">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="loader">
+        <div class="spinner">💖</div>
+    </div>
+
+    <div class="bg-animation">
+        <div class="heart">💖</div>
+        <div class="heart">✨</div>
+        <div class="heart">🌸</div>
+        <div class="heart">💖</div>
+        <div class="heart">✨</div>
+    </div>
+
+    <div id="app-container">
+        
+        <div id="question-view">
+            <div class="sticker-container">
+                <img id="cat-sticker" src="assets/Cats Chibi GIF.gif" alt="Cute Cat">
+            </div>
+            <h1 id="main-question">Will you be my Valentine? 🥺</h1>
+            
+            <div class="interactive-area">
+                <button id="yes-btn">Yes! 💖</button>
+                <button id="no-btn">No</button>
+                
+                <div id="trash-can" style="display: none;">🗑️</div>
+                <p id="forced-text" style="display: none;">⬆️ Now u don't have another option.</p>
+            </div>
+        </div>
+
+        <div id="success-view" style="display: none;">
+            <h1 class="success-message">Yay! I love you! 💕</h1>
+            
+            <div class="video-gallery">
+                <video id="us-video" controls loop playsinline></video>
+            </div>
+
+            <p class="beautiful-message">
+                Parti Mi 🩵, You mean a lot to me. I can't wait to make even more beautiful memories together. Happy Valentine's Day! 🌹✨
+            </p>
+        </div>
+
+    </div>
+
+    <audio id="bg-music" loop>
+        <source src="assets/0212.MP3" type="audio/mpeg">
+    </audio>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
